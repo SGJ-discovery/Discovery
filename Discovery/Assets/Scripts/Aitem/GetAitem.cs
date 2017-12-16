@@ -6,6 +6,7 @@ public class GetAitem : MonoBehaviour {
 
     private bool hitFlag; // 当たったかどうかのフラグ
     private GameObject obj; // 当たったオブジェクトを格納する
+    private GameObject getObj; // 取得したアイテムを格納
 
     void Start()
     {
@@ -32,7 +33,7 @@ public class GetAitem : MonoBehaviour {
     {
         if (Input.GetKeyDown("e"))
         {
-            // このコンポーネントを持つGameObjectを破棄する
+            getObj = obj.gameObject;
             Destroy(obj.gameObject);
         }
     }
