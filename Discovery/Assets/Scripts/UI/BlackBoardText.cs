@@ -33,9 +33,6 @@ public class BlackBoardText : MonoBehaviour
         AllItemsText.Add("nanika");
         AllItemsText.Add("hati");
         AllItemsText.Add("kyu");
-
-        int[] test = { 0, 3, 5 };
-        SetBBText(test);
     }
 
 	// Update is called once per frame
@@ -55,11 +52,11 @@ public class BlackBoardText : MonoBehaviour
         }
     }
 
-    public void SetBBText(int[] AnswerItems)
+    public void SetBBText(GameObject[] AnswerItems)
     {
         for(int i = 0; i < 3; i++)
         {
-            switch (AnswerItems[i])
+            switch (GetIndex(AnswerItems[i]))
             {
                 case (int)AllItems.pencil: Text[i].text = AllItemsText[(int)AllItems.pencil]; break;
                 case (int)AllItems.eraser: Text[i].text = AllItemsText[(int)AllItems.eraser]; break;
@@ -87,5 +84,12 @@ public class BlackBoardText : MonoBehaviour
         {
             RemoveBBText(AllItemsText.IndexOf(ItemText));
         }
+    }
+
+    private int GetIndex(GameObject Obj)
+    {
+        int ret;
+        ret = AllItemsText.IndexOf(Obj.name);
+        return ret;
     }
 }
