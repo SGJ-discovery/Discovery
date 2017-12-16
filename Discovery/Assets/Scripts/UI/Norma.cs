@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Norma : MonoBehaviour
 {
 
-    static int iNormaCount = 0;
+    static public int iNormaCount = 0;
     private string sNorma = "";
     public Text tNorma;
 
@@ -21,5 +21,9 @@ public class Norma : MonoBehaviour
     {
         sNorma = "NORMA: " + iNormaCount + "/3";
         tNorma.text = sNorma;
+        if (Input.GetKeyDown("space"))
+        {
+            iNormaCount++;
+        }
     }
 }
