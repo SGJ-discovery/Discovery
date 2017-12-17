@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetAitem : MonoBehaviour {
+public class GetAitem : MonoBehaviour
+{
 
     private bool hitFlag; // 当たったかどうかのフラグ
     private GameObject obj; // 当たったオブジェクトを格納する
-    private GameObject getObj =null; // 取得したアイテムを格納
+    private GameObject getObj = null; // 取得したアイテムを格納
 
     GameObject Kyoutaku;
 
@@ -49,53 +50,49 @@ public class GetAitem : MonoBehaviour {
     void Update()
     {
 
+
         //取得
         if (Input.GetKeyDown("e"))
         {
+
             getObj = obj.gameObject;
             //Debug.Log(getObj);
 
             SelectItem();
 
             Destroy(obj.gameObject);
+            hitFlag = false;
         }
 
-      
- }
-    
 
 
-
-
-
+    }
 
     void SelectItem()
     {
 
 
-            if (getObj.name == "pencil")
-            {
-                           
-                Kyoutaku.SendMessage("pencil");
-            }
+        if (getObj.name == "pencil")
+        {
 
-            if (getObj.name == "eraser")
-            {
+            Kyoutaku.SendMessage("pencil");
+        }
+
+        if (getObj.name == "eraser")
+        {
 
             Kyoutaku.SendMessage("eraser");
 
-            }
-            if (getObj.name == "dictionary")
-            {
+        }
+        if (getObj.name == "dictionary")
+        {
 
             Kyoutaku.SendMessage("dictionary");
 
         }
 
-        
-    }
-
-
-
 
     }
+}
+
+   
