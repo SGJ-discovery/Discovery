@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NextStage : MonoBehaviour {
-
-    public Text Clear;
-    public Norma Norma;
+public class NextStage : MonoBehaviour
+{
+    [SerializeField]
+    private Text Clear;
+    [SerializeField]
+    private Norma Norma;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         Clear.text = "";
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if(Norma.iNormaCount >= 3)
         {
             Clear.text = "CLEAR STAGE";
