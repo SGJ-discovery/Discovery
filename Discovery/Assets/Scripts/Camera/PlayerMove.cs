@@ -13,6 +13,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject cameraObj; // カメラを格納
+
     private bool down = false;
     private float _prevX;
     private float speed = 3.0f;
@@ -24,17 +27,16 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey("w") || Input.GetAxisRaw("Vertical") < 0)
         {
             this.transform.position += transform.forward * 0.1f;
-            //this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") || Input.GetAxisRaw("Vertical") > 0)
         {
             this.transform.position -= transform.forward * 0.1f;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetAxisRaw("Horizontal") > 0)
         {
             this.transform.position += transform.right * 0.1f;
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetAxisRaw("Horizontal") < 0)
         {
             transform.position -= transform.right * 0.1f;
         }
@@ -67,21 +69,14 @@ public class PlayerMove : MonoBehaviour
             this.transform.Rotate(euler, Space.World);
         }
 
-
-        // ゲームコントローラー
-        //Walk
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        // 右スティックで方向転換をする
+        if (Input.GetAxisRaw("Vertical2") > 0)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed * 1); //正面
+            this.transform.Rotate(0, 1, 0);
         }
-
-        //Direction of Caracter's face
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        if (Input.GetAxisRaw("Vertical2") < 0)
         {
-            transform.rotation = Quaternion.LookRotation(transform.position +
-            (Vector3.right * Input.GetAxisRaw("Horizontal")) +
-            (Vector3.forward * Input.GetAxisRaw("Vertical"))
-            - transform.position);
+            this.transform.Rotate(0, -1, 0);
         }
     }
 }
