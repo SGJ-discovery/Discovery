@@ -21,12 +21,17 @@ public class SelectMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown("p"))
-        {
-            GameObject obj = GameObject.Find("pencil");
-            SetItem(obj);
-        }
-	}
+        //if (Input.GetKeyDown("p"))
+        //{
+        //    GameObject obj = GameObject.Find("pencil");
+        //    SetItem(obj);
+        //}
+        //if (Input.GetKeyDown("o"))
+        //{
+        //    GameObject obj = GameObject.Find("curtain");
+        //    SetItem(obj);
+        //}
+    }
 
     public void SetItem(GameObject Item)
     {
