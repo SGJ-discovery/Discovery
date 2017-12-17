@@ -1,7 +1,7 @@
 ﻿/***********************************************************************/
-/*! @file   CameraMove.cs
+/*! @file   PlayerMove.cs
 *************************************************************************
-*   @brief  カメラを動かすスクリプト
+*   @brief  プレイヤーを動かすスクリプト
 *************************************************************************
 *   @author yuta takatsu
 *************************************************************************
@@ -13,27 +13,30 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private bool down = false; 
+    [SerializeField]
+    private GameObject cameraObj; // カメラを格納
+
+    private bool down = false;
     private float _prevX;
+    private float speed = 3.0f;
     private Vector3 _delta = new Vector3(0.0f, 0.0f, 0.0f);
 
     void Update()
     {
         // 上下左右に移動(キーボード)
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") || Input.GetAxisRaw("Vertical") < 0)
         {
             this.transform.position += transform.forward * 0.1f;
-            //this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") || Input.GetAxisRaw("Vertical") > 0)
         {
             this.transform.position -= transform.forward * 0.1f;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetAxisRaw("Horizontal") > 0)
         {
             this.transform.position += transform.right * 0.1f;
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetAxisRaw("Horizontal") < 0)
         {
             transform.position -= transform.right * 0.1f;
         }
@@ -59,11 +62,21 @@ public class PlayerMove : MonoBehaviour
         if (down)
         {
             _delta.x = (_prevX - Input.mousePosition.x) / 10;
-   
+
             _prevX = Input.mousePosition.x;
 
             Vector3 euler = new Vector3(_delta.y, _delta.x, _delta.z);
             this.transform.Rotate(euler, Space.World);
+        }
+
+        // 右スティックで方向転換をする
+        if (Input.GetAxisRaw("Vertical2") > 0)
+        {
+            this.transform.Rotate(0, 1, 0);
+        }
+        if (Input.GetAxisRaw("Vertical2") < 0)
+        {
+            this.transform.Rotate(0, -1, 0);
         }
     }
 }
