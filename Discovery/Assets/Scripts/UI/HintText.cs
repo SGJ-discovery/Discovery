@@ -14,11 +14,17 @@ public class HintText : MonoBehaviour {
     [SerializeField]
     private Text HintText3;
 
+    static int HintNum = 0;
+
+    private string[,] Text = new string[,] { { "字を書くものだよ", "字を消すものだよ", "単語を調べるものだよ" },
+                                             { "野菜とかを切るものだよ", "ご飯をよそうものだよ", "料理で煮込むのに使うものだよ" },
+                                             { "遠くの人とお話が出来るよ", "時間を教えてくれるよ", "黒板に書いてあるものを消すものだよ" } };
+
     // Use this for initialization
     void Start () {
-        HintText1.text = "字を書くものだよ";
-        HintText2.text = "字を消すものだよ";
-        HintText3.text = "単語を調べるものだよ";
+        HintText1.text = Text[0, 0];
+        HintText2.text = Text[0, 1];
+        HintText3.text = Text[0, 2];
     }
 	
 	// Update is called once per frame
@@ -33,10 +39,11 @@ public class HintText : MonoBehaviour {
         HintText3.gameObject.SetActive(BBText.Text[2].gameObject.activeSelf);
     }
 
-    public void setHint(string[] Hint)
+    public void setHint()
     {
-        HintText1.text = Hint[0];
-        HintText2.text = Hint[1];
-        HintText3.text = Hint[2];
+        HintNum++;
+        HintText1.text = Text[HintNum, 0];
+        HintText2.text = Text[HintNum, 1];
+        HintText3.text = Text[HintNum, 2];
     }
 }

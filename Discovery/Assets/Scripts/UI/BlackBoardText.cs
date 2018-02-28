@@ -8,7 +8,7 @@ public class BlackBoardText : MonoBehaviour
     {
         pencil,
         eraser,
-        chalk,
+        dictionary,
         locker,
         curtain,
         green,
@@ -26,7 +26,7 @@ public class BlackBoardText : MonoBehaviour
     {
         AllItemsText.Add("pencil");
         AllItemsText.Add("eraser");
-        AllItemsText.Add("chalk");
+        AllItemsText.Add("dictionary");
         AllItemsText.Add("locker");
         AllItemsText.Add("curtain");
         AllItemsText.Add("green");
@@ -34,13 +34,13 @@ public class BlackBoardText : MonoBehaviour
         AllItemsText.Add("hati");
         AllItemsText.Add("kyu");
 
-        //GameObject ObjPen = GameObject.Find("pencil");
-        //GameObject ObjLock = GameObject.Find("locker");
-        //GameObject ObjCur = GameObject.Find("curtain");
+        GameObject ObjPen = GameObject.Find("pencil");
+        GameObject ObjLock = GameObject.Find("eraser");
+        GameObject ObjCur = GameObject.Find("dictionary");
 
-        //GameObject[] ObjList = { ObjPen, ObjLock, ObjCur };
+        GameObject[] ObjList = { ObjPen, ObjLock, ObjCur };
 
-        //SetBBText(ObjList);
+        SetBBText(ObjList);
     }
 
 	// Update is called once per frame
@@ -57,7 +57,7 @@ public class BlackBoardText : MonoBehaviour
             {
                 case (int)AllItems.pencil: Text[i].text = AllItemsText[(int)AllItems.pencil]; break;
                 case (int)AllItems.eraser: Text[i].text = AllItemsText[(int)AllItems.eraser]; break;
-                case (int)AllItems.chalk: Text[i].text = AllItemsText[(int)AllItems.chalk]; break;
+                case (int)AllItems.dictionary: Text[i].text = AllItemsText[(int)AllItems.dictionary]; break;
                 case (int)AllItems.locker: Text[i].text = AllItemsText[(int)AllItems.locker]; break;
                 case (int)AllItems.curtain: Text[i].text = AllItemsText[(int)AllItems.curtain]; break;
                 case (int)AllItems.green: Text[i].text = AllItemsText[(int)AllItems.green]; break;
