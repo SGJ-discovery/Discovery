@@ -12,7 +12,7 @@ public class TextClick : MonoBehaviour {
     // Use this for initialization
     void Start () {
         ItemText = this.GetComponent<Text>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

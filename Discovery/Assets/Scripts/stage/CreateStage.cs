@@ -10,6 +10,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CreateStage : MonoBehaviour {
 
@@ -18,23 +20,37 @@ public class CreateStage : MonoBehaviour {
     private GameObject createStage;   // 生成するオブジェクトを格納
     public static int stageNum;       // 現在のステージのナンバー
 
-	void Start () {
+    [SerializeField]
+    private GameObject CanvasPrefab; // Canvasのプレハブを格納
+    private GameObject CreateCanvas; // 生成するオブジェクトを格納
+
+    void Start () {
         stageNum = 0;
         createStage = Instantiate(stagePrefab[stageNum], this.transform);
+
+        CreateCanvas = Instantiate(CanvasPrefab, this.transform.root);
     }
 	
     public void StageCreate()
     {
-        GameObject.Destroy(createStage);
         stageNum++;
+        GameObject.Destroy(createStage);
+        GameObject.Destroy(CreateCanvas);
         createStage = Instantiate(stagePrefab[stageNum], this.transform);
+        CreateCanvas = Instantiate(CanvasPrefab, this.transform.root);
 
+        
     }
     void Update()
     {
-        if (Input.GetKeyDown("n"))
-        {
-            StageCreate();
-        }
+        //if (Input.GetKeyDown("n"))
+        //{
+        //    StageCreate();
+        //}
+    }
+
+    public int GetStagePrefab()
+    {
+        return stagePrefab.Length;
     }
 }

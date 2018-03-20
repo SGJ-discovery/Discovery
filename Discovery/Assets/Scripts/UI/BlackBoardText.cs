@@ -8,7 +8,7 @@ public class BlackBoardText : MonoBehaviour
     {
         pencil,
         eraser,
-        chalk,
+        dictionary,
         locker,
         curtain,
         green,
@@ -21,12 +21,14 @@ public class BlackBoardText : MonoBehaviour
 
     public TextMesh[] Text = new TextMesh[3];
 
+    private GameObject Kyoutaku;
+
     // Use this for initialization
     void Start ()
     {
         AllItemsText.Add("pencil");
         AllItemsText.Add("eraser");
-        AllItemsText.Add("chalk");
+        AllItemsText.Add("dictionary");
         AllItemsText.Add("locker");
         AllItemsText.Add("curtain");
         AllItemsText.Add("green");
@@ -34,19 +36,24 @@ public class BlackBoardText : MonoBehaviour
         AllItemsText.Add("hati");
         AllItemsText.Add("kyu");
 
-        //GameObject ObjPen = GameObject.Find("pencil");
-        //GameObject ObjLock = GameObject.Find("locker");
-        //GameObject ObjCur = GameObject.Find("curtain");
+        GameObject ObjPen = GameObject.Find("pencil");
+        GameObject ObjLock = GameObject.Find("eraser");
+        GameObject ObjCur = GameObject.Find("dictionary");
 
-        //GameObject[] ObjList = { ObjPen, ObjLock, ObjCur };
+        Kyoutaku = GameObject.FindWithTag("Kyoutaku");
 
-        //SetBBText(ObjList);
+        GameObject[] ObjList = { ObjPen, ObjLock, ObjCur };
+
+        SetBBText(ObjList);
     }
 
 	// Update is called once per frame
 	void Update ()
     {
-
+        if(Kyoutaku == null)
+        {
+            Kyoutaku = GameObject.FindWithTag("Kyoutaku");
+        }
     }
 
     public void SetBBText(GameObject[] AnswerItems)
@@ -57,7 +64,7 @@ public class BlackBoardText : MonoBehaviour
             {
                 case (int)AllItems.pencil: Text[i].text = AllItemsText[(int)AllItems.pencil]; break;
                 case (int)AllItems.eraser: Text[i].text = AllItemsText[(int)AllItems.eraser]; break;
-                case (int)AllItems.chalk: Text[i].text = AllItemsText[(int)AllItems.chalk]; break;
+                case (int)AllItems.dictionary: Text[i].text = AllItemsText[(int)AllItems.dictionary]; break;
                 case (int)AllItems.locker: Text[i].text = AllItemsText[(int)AllItems.locker]; break;
                 case (int)AllItems.curtain: Text[i].text = AllItemsText[(int)AllItems.curtain]; break;
                 case (int)AllItems.green: Text[i].text = AllItemsText[(int)AllItems.green]; break;
@@ -78,13 +85,16 @@ public class BlackBoardText : MonoBehaviour
     public void CheckItem(GameObject Obj, string ItemText)
     {
         int index = 0;
+        Debug.Log("objname : " + Obj);
         for(int i = 0; i < 3; i++)
         {
             if (Text[i].text.Equals(ItemText)) index = i;
         }
-        if (Obj.name.Equals(ItemText))
+        if (Obj.name.Equals(ItemText + "(Clone)"))
         {
             RemoveBBText(index);
+            Destroy(Obj.gameObject);
+            Kyoutaku.SendMessage(ItemText);
         }
     }
 

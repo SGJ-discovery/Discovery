@@ -8,6 +8,9 @@ public class GetAitem : MonoBehaviour
     private bool hitFlag; // 当たったかどうかのフラグ
     private GameObject obj; // 当たったオブジェクトを格納する
     private GameObject getObj = null; // 取得したアイテムを格納
+    [SerializeField]
+    private GameObject menu;
+    private static SelectMenu _menu;
 
     GameObject Kyoutaku;
 
@@ -18,7 +21,8 @@ public class GetAitem : MonoBehaviour
     void Start()
     {
         hitFlag = false;
-
+        _menu = menu.GetComponent<SelectMenu>();
+        Debug.Log("_menu : " + _menu);
         Kyoutaku = GameObject.FindWithTag("Kyoutaku");
     }
 
@@ -34,7 +38,7 @@ public class GetAitem : MonoBehaviour
         }
         else
         {
-            hitFlag = false;
+            //hitFlag = false;
         }
 
 
@@ -52,15 +56,15 @@ public class GetAitem : MonoBehaviour
 
 
         //取得
-        if (Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("e")&&hitFlag|| Input.GetButtonDown("Fire1")&&hitFlag)
         {
 
             getObj = obj.gameObject;
-            //Debug.Log(getObj);
+            Debug.Log(getObj);
+            //SelectItem();
 
-            SelectItem();
-
-            Destroy(obj.gameObject);
+            //Destroy(obj.gameObject);
+            _menu.SetItem(getObj);
             hitFlag = false;
         }
 
@@ -68,31 +72,31 @@ public class GetAitem : MonoBehaviour
 
     }
 
-    void SelectItem()
-    {
+    //void SelectItem()
+    //{
 
 
-        if (getObj.name == "pencil")
-        {
+    //    if (getObj.name == "pencil(Clone)")
+    //    {
 
-            Kyoutaku.SendMessage("pencil");
-        }
+    //        Kyoutaku.SendMessage("pencil");
+    //    }
 
-        if (getObj.name == "eraser")
-        {
+    //    if (getObj.name == "eraser(Clone)")
+    //    {
 
-            Kyoutaku.SendMessage("eraser");
+    //        Kyoutaku.SendMessage("eraser");
 
-        }
-        if (getObj.name == "dictionary")
-        {
+    //    }
+    //    if (getObj.name == "dictionary(Clone)")
+    //    {
 
-            Kyoutaku.SendMessage("dictionary");
+    //        Kyoutaku.SendMessage("dictionary");
 
-        }
+    //    }
 
 
-    }
+    //}
 }
 
    

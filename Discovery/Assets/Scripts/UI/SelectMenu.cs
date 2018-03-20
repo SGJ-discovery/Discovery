@@ -5,17 +5,23 @@ using UnityEngine.UI;
 
 public class SelectMenu : MonoBehaviour {
 
-    private GameObject Obj;
-    private GameObject Panel;
+    private static GameObject Obj;
+    private static GameObject Panel;
 
-    [SerializeField]
-    private BlackBoardText BBText;
-    [SerializeField]
-    private Text[] Text = new Text[3];
+    //[SerializeField]
+    private static BlackBoardText BBText;
+    //[SerializeField]
+    private static Text[] Text = new Text[3];
 
 	// Use this for initialization
 	void Start () {
+        BBText = GameObject.Find("block_board").GetComponent<BlackBoardText>();
         Panel = GameObject.Find("SelectMenu");
+
+        Text[0] = GameObject.Find("Text (1)").GetComponent<Text>();
+        Text[1] = GameObject.Find("Text (2)").GetComponent<Text>();
+        Text[2] = GameObject.Find("Text (3)").GetComponent<Text>();
+
         Panel.gameObject.SetActive(false);
     }
 
@@ -31,16 +37,20 @@ public class SelectMenu : MonoBehaviour {
         //    GameObject obj = GameObject.Find("curtain");
         //    SetItem(obj);
         //}
+        if(BBText == null)
+        {
+            BBText = GameObject.Find("block_board").GetComponent<BlackBoardText>();
+        }
     }
 
     public void SetItem(GameObject Item)
     {
         Obj = Item;
 
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             Text[i].text = BBText.Text[i].text;
-            if(BBText.Text[i].gameObject.activeSelf)
+            if (BBText.Text[i].gameObject.activeSelf)
             {
                 Text[i].gameObject.SetActive(true);
             }
